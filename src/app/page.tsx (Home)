@@ -1,0 +1,43 @@
+import Image from 'next/image';
+import Link from 'next/link';
+import ChatBox from '@/src/components/ChatBox';
+
+export default function HomePage() {
+  return (
+    <>
+      <section className="mt-8 grid md:grid-cols-[1fr,2fr] gap-8 items-center">
+        <div className="glass p-6 rounded-lg">
+          <Image
+            src="/profile.jpg"
+            alt="Ajeet"
+            width={180}
+            height={180}
+            className="rounded-full border"
+          />
+          <h1 className="mt-4 text-2xl font-bold">Ajeet Kumar</h1>
+          <p className="opacity-80">
+            SEO Content Writer • Virtual Assistant • Social Media Manager. I build scalable,
+            AI-assisted workflows to deliver high-quality outcomes fast.
+          </p>
+          <div className="mt-4 flex gap-3">
+            <Link className="px-3 py-1 rounded bg-primary text-white" href="/projects">View Projects</Link>
+            <Link className="px-3 py-1 rounded border" href="https://www.linkedin.com/in/ajeek095/" target="_blank">LinkedIn</Link>
+          </div>
+        </div>
+        <div className="glass p-6 rounded-lg">
+          <h2 className="text-xl font-semibold">What I offer</h2>
+          <ul className="mt-2 list-disc pl-5 opacity-90">
+            <li>SEO content that ranks, with topic research and on-page SEO</li>
+            <li>Virtual assistance: inbox, scheduling, docs, research</li>
+            <li>Social media calendars, execution, analytics</li>
+            <li>AI-powered transcription, summarization, and content workflows</li>
+          </ul>
+          <p className="mt-4 opacity-80">
+            Based in Bengaluru. Open to global freelance projects and outcome-based engagements.
+          </p>
+        </div>
+      </section>
+      <ChatBox />
+    </>
+  );
+}
