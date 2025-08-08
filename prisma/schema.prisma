@@ -1,0 +1,112 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Project {
+  id          String   @id @default(cuid())
+  title       String
+  slug        String   @unique
+  description String
+  tech        String[]
+  demoUrl     String?
+  repoUrl     String?
+  platform    String?  // vercel | netlify | pages | replit | other
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Job {
+  id          String   @id @default(cuid())
+  company     String
+  title       String
+  location    String?
+  startDate   DateTime
+  endDate     DateTime?
+  description String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Education {
+  id          String   @id @default(cuid())
+  school      String
+  degree      String?
+  field       String?
+  startDate   DateTime?
+  endDate     DateTime?
+  details     String?
+}
+
+model Certificate {
+  id        String   @id @default(cuid())
+  name      String
+  issuer    String?
+  issueDate DateTime?
+  url       String?
+}
+
+model Skill {
+  id    String @id @default(cuid())
+  name  String @unique
+  level String? // Beginner | Intermediate | Advanced
+}
+
+model Award {
+  id        String   @id @default(cuid())
+  title     String
+  issuer    String?
+  date      DateTime?
+  details   String?
+}
+
+model Language {
+  id     String @id @default(cuid())
+  name   String
+  level  String? // Native | Fluent | Professional | Basic
+}
+
+model Volunteering {
+  id          String   @id @default(cuid())
+  org         String
+  role        String
+  startDate   DateTime?
+  endDate     DateTime?
+  description String?
+}
+
+model Course {
+  id        String   @id @default(cuid())
+  name      String
+  org       String?
+  date      DateTime?
+  details   String?
+}
+
+model ContentBlock {
+  id       String   @id @default(cuid())
+  key      String   @unique // "about", "intro", etc.
+  markdown String
+  updatedAt DateTime @updatedAt
+}
+
+model UploadedFile {
+  id        String   @id @default(cuid())
+  name      String
+  path      String   // Supabase storage path
+  mime      String?
+  page      String?  // where to show: resume | courses | projects | misc
+  createdAt DateTime @default(now())
+}
+
+model SyncSource {
+  id       String   @id @default(cuid())
+  type     String   // "sheet-json"
+  url      String
+  enabled  Boolean  @default(true)
+  schedule String?  // "weekly", etc.
+}
